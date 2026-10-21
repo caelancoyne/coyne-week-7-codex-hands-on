@@ -283,7 +283,7 @@ ____________________________________________________________
 
 > What is the issue with garage year 2207
 
-**AI produced:** Explained that construction in 2207 is incompatible with sales in 2006–2010 and likely reflects a data-entry error. Made no changes at this step.
+**AI produced:** Explained that construction in 2207 is incompatible with sales in 2006â€“2010 and likely reflects a data-entry error. Made no changes at this step.
 
 **What I accepted:**
 
@@ -500,6 +500,554 @@ ____________________________________________________________
 > Alright let's take this as a spot to shelf what we're working on and do some administrative tasks. First, in the log folder, can you create a file titled 'ai-workflow-log.md' with my prompt entries noted by date and time, what you produced (it can be shortened if need be), and then blank lines for me to write what i accepted, what i modified, what i rejected, and to write a brief rationale.
 
 **AI produced:** Created `log/ai-workflow-log.md` with 19 prompt entries, abbreviated output summaries, session-date labels, blank time fields, and blank acceptance/modification/rejection/rationale fields. Explained that exact prompt timestamps are unavailable in the conversation history.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 20. Extract Story County tornado records
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Great, can you extract the tornadoes that occured in STORY county from this website and store them in a second working .csv file with the year, intensity, and all of the impact figures such as fatalities, property damage, crop damage. Once we have that we can move on with comparing it with our prices: tornadopath.com/iowa
+
+**AI produced:** Retrieved all 70 Story County tornado records embedded on Tornado Pathâ€™s county page (1882â€“2025) and created `analysis/Iowa-Story-tornadoes-working.csv`. Included year, date, intensity, direct and indirect fatalities/injuries and totals, reported and numeric USD property/crop damage, track measurements, coordinates, source, and narrative. The CSV has 70 rows; totals are 1 fatality and 27 injuries. Preserved reported damage values alongside numeric USD conversions.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 21. Start a Jupyter exploration of housing and tornado data
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Alright let's begin exploring this data within a jupyter notebook, storing both spreadsheets as pandas dataframes. We also don't need any tornado data from before our housing data begins, so in our notebook we can omit any tornadoes that occurred before our first home was built, if there are any.
+
+**AI produced:** Created `analysis/ames_tornado_exploration.ipynb`. It loads the housing and Story County tornado CSVs into pandas DataFrames, filters tornado events earlier than the minimum `Year Built`, and includes initial summaries for home prices by basement presence and tornado counts and impacts by year. The housing data begins in 1872 and the tornado records begin in 1882, so this filter will omit zero records with the current files.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 22. Expand tornado data to surrounding counties
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> It looks like our tornado dataset is a bit sparse, why dont we expand it to story county and its surrounding counties. so story, hamilton, hardin, marshall, jasper, polk, and boone.
+
+**AI produced:** Retrieved all records listed on Tornado Path for Story, Hamilton, Hardin, Marshall, Jasper, Polk, and Boone counties, and saved 435 county records in `analysis/Iowa-central-counties-tornadoes-working.csv`. Preserved the prior Story-only working CSV. Updated the Jupyter notebook to load the expanded file and summarize tornado counts and impacts by year and county. The expanded data begin in 1860; the notebookâ€™s existing filter will exclude one Hardin County record before the first homeâ€™s 1872 construction year, retaining 434 records. Cleared stale notebook execution outputs after changing its input file.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 23. Format notebook summaries and count tornadoes by county
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Alright two quick things to begin with, in the summary tables you've created, can we get rid of the decimals and the scientific notation. We don't need years reported as 1953.00000. Also, for the tornado summary table can we do count table of tornadoes in each county through our entire dataset rather than a summary of each tornado occurence
+
+**AI produced:** Set pandas display formatting to show floating-point summary values as rounded whole numbers without scientific notation. Replaced the year-and-county impact summary with a count of tornado records by county across all years retained after the housing-year cutoff.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 24. Format summary tables and count tornadoes by county
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Alright two quick things to begin with, in the summary tables you've created, can we get rid of the decimals and the scientific notation. We don't need years reported as 1953.00000. Also, for the tornado summary table can we do count table of tornadoes in each county through our entire dataset rather than a summary of each tornado occurence
+
+**AI produced:** Set pandas display formatting to show floating-point summary values as rounded whole numbers without scientific notation. Replaced the year-and-county impact summary with a tornado count by county across all years retained after the housing-year cutoff. Cleared previous notebook outputs so they do not show stale tables; rerunning the notebook will populate the updated summaries.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 25. Reset exploration to housing data and summary statistics
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Actually looking at it now I'm going to walk back my earlier statement about the years. Let's just begin again with a clean slate before we get ahead of ourselves. housing data in a dataframe and we'll start with some summary statistics. keep in mind that years should be reported as strings
+
+**AI produced:** Reset the notebook to load only the housing working CSV into `homes_df`. The Year Built, Year Remod/Add, Garage Yr Blt, and Yr Sold columns are read as strings. Added numeric descriptive statistics and categorical summaries for the year fields; no tornado data is loaded or summarized.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 26. Add tornado summaries for 2005â€“2010
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Ok I cleaned up what you started, let's introduce the tornado data now. Let's just stick with tornadoes from the years 2005-2010 and add summary statistics for those
+
+**AI produced:** Preserved the user's cleaned housing notebook content and added a DataFrame for the expanded seven-county tornado dataset with `Year` kept as a string. Added a 2005â€“2010 inclusive filter, year counts, descriptive statistics for fatalities, injuries, property and crop damage, and track length and width, plus county and intensity counts. The selected period contains 37 records.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 27. Visualize average sale prices and sales counts by year
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Next let's get some exploratory visualizations, we can start by plotting average sales prices and amount of sales per year
+
+**AI produced:** Added a housing summary grouped by string-valued `Yr Sold`, with average sale price and number of sales, plus side-by-side line and bar charts. The average-price axis is formatted as whole-dollar currency and the sales-count chart uses whole-number labels.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 28. Change sales and tornado summaries to monthly grain
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Rather than the year grain we should switch to months. that way we can get a better idea of the impact they have, if any, on home sales. can you add a column to the tornado table that matches the Mo Sold column format in the housing table
+
+**AI produced:** Changed sale price and sales-count summaries and charts from year to month-of-year using `Mo Sold`. Added integer `Mo` (1â€“12) to tornado records based on event date, preserving the original month-name and year fields, and added monthly tornado counts for the selected 2005â€“2010 period. Cleared outputs from modified cells so old year-based charts and tables are not displayed.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## 29. Convert monthly sales views to a time series
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> can you switch those to time series data so it tracks the sales price per month across the entire dataset rather than simply sales by month
+
+**AI produced:** Changed the housing aggregation to use a chronological year-month timestamp built from string-valued `Yr Sold` and numeric `Mo Sold`. The table and two line plots now track average sale price and number of sales for every month across the full housing period, including zero-sale months if any occur between the first and last sale months. Cleared the previous month-of-year summary and chart outputs.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+
+## Entry 30
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> The 6th chunk, line 4 is causing an IntCastingNaNError, can you spot why that might be?
+
+**AI produced:** Diagnosed the error: parsing mixed-format `EventDateTime` values with `errors="coerce"` creates missing dates, and casting the resulting month values to plain `int64` fails. Updated the tornado loading cell to derive numeric month values from the existing `Month` names, then cleared outputs and execution counts for the changed cell and dependent tornado summaries.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________## Entry 31
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Great, next let's add the same visualizations for tornado frequency per month
+
+**AI produced:** Added a chronological monthly tornado frequency table and line chart for the 2005â€“2010 subset. The series counts unique tornado events per month and fills months without events with zero; the plot uses the same six-month date ticks and count formatting as the housing time-series charts.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________## Entry 32
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> Everything looks good so far, now for the sake of comparison lets overlay the three charts on the same x axis to visually compare the patterns and see if there's any trends. you can use the 2005-2010 range and just leave the first year blank for the housing data
+
+**AI produced:** Added a combined comparison table and three-panel figure for monthly average home sale price, number of home sales, and tornado frequency from 2005 through 2010. All panels share the same monthly x-axis. Housing series are explicitly blank for 2005, while tornado months with no events remain zero.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________## Entry 33
+
+**Date:** 2026-10-19  
+**Time:** ____________________
+
+**Prompt:**
+
+> For the sake of visibility, can you add vertical lines in each of the charts to indicate the years
+
+**AI produced:** Added subtle dotted vertical lines at each January boundary to the housing monthly charts, tornado monthly chart, and all three panels in the combined comparison. Cleared the affected chart outputs and execution counts for rerendering.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________## Entry 34
+
+**Date:** 2026-10-20  
+**Time:** ____________________
+
+**Prompt:**
+
+> Let's pick back up where we left off, I think the most meaningful insight we can get from this housing data and our tornado data is around the seasonality of both. We can look at the data and compare home sales before, during, and after the months where there were, or are typically, tornadoes and see if that had any impact on buyers being willing to spend more for a basement, presumably for safety. the first assumption there to test though is whether or not the median home price with/without a basement differs significantly across all months though
+
+**AI produced:** Added an initial all-month comparison of median sale price by basement presence, defined from positive `Total Bsmt SF`. The notebook reports group sample sizes, medians, their difference, and a seeded 10,000-resample bootstrap 95% confidence interval. It labels the result as an unadjusted association rather than a causal basement premium.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________## Entry 35
+
+**Date:** 2026-10-20  
+**Time:** ____________________
+
+**Prompt:**
+
+> I can't seem to see the confidence interval. In addition to getting that sorted out let's take a look at the data from a tornado specific vantage point. let's look at both the percentage of homes purchased that feature a basement, and the price buyers are willing to pay for a basement, in the month directly before, during, and after a tornado occurs.
+
+**AI produced:** Made the all-month basement price estimate and bootstrap confidence interval print as separate labeled lines. Added tornado event-month windows that summarize home purchases with a basement and the median sale price difference between homes with and without a basement in the month before, during, and after tornado-active months. Repeated tornadoes in one calendar month are deduplicated; the notebook documents that nearby event windows can overlap and that comparisons are unadjusted associations.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________## Entry 36
+
+**Date:** 2026-10-20  
+**Time:** ____________________
+
+**Prompt:**
+
+> I think it's fair to say that at this point there doesn't appear to be much of a difference between basement and non-basement purchases, but to check, since homes with basements make up the vast majority of our dataset, let's compare our tornado figures with the percentages of homes that don't have a basement
+
+**AI produced:** Added the complementary no-basement purchase percentage to the tornado before/during/after summary. Added a 2005-2010 monthly table aligning seven-county tornado counts with Ames purchase counts and no-basement percentages, an active versus no-tornado-month summary, and a dual-axis time series plus a monthly scatter plot. Month sample sizes remain visible; 2005 housing values are blank.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________## Entry 37
+
+**Date:** 2026-10-20  
+**Time:** ____________________
+
+**Prompt:**
+
+> Alright I still am not convinced that there's a noticeable difference between basement and non basement homes, but to be sure let's wrap up our analysis with two things. we have the set of 9 tornado months and 46 others, can we fit a logistic regression with both the basement/no basement sales, and tornado/no tornado months? if you need to amend the data in any way to make the figures 0/1 you can do that whichever way you choose. the second item that might be worth looking at is an anova for both the tornado and non/tornado months. If there's no significant difference in either of those i think we can safely say that the Iowans do not appear to allow the threat of tornadoes to impact their home-purchasing decisions
+
+**AI produced:** Added binary basement and tornado-month indicators; a logistic regression for basement-purchase odds; and a factorial sale-price model testing basement status, tornado-month status, and their interaction. Models control for sale year and calendar month and use sale-month-clustered standard errors. The notebook formats odds ratios and p-values to retain useful precision. It explains that non-significance is not proof of no impact and that unadjusted property attributes limit causal interpretation.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________## Entry 38
+
+**Date:** 2026-10-20  
+**Time:** ____________________
+
+**Prompt:**
+
+> I think we're alright to omit a property-adjusted price model. Let's focus on a report output now. Can you start with a rough pdf first draft of the analysis here. Our main question was to observe whether or not Iowans make house purchasing decisions based on the likelihood of encountering a tornado. The secondary question was whether or not houses with basements, which allow for a level of relative safety in the event of a tornado, are sold any different around tornado months. Walking through the visualizations and tests we had here should be enough of a launch point to put together a solid report that we'll take a look at and modify if necessary
+
+**AI produced:** Created a six-page draft report PDF and editable LaTeX source with the housing, tornado-frequency, shared-timeline, and no-basement comparison figures. The report includes the 55-month sample (9 tornado-active, 46 inactive), descriptive before/during/after results, logistic and factorial model results, and limitations on causal interpretation and the small no-basement group.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________## Entry 39
+
+**Date:** 2026-10-20  
+**Time:** ____________________
+
+**Prompt:**
+
+> You hit on all of the points that I was planning to have to add after the fact such as the limitations of the data and the scope of the data. After reading through it all I think as far as text goes we're all set. From a visual standpoint though, I just want to make sure that the text in our final draft is black since the formatting appears to have made it grey here, and I think we can also get rid of Figures 1 and 3. the joint graph of all 3 charts that share an X-axis should suffice.
+
+**AI produced:** Revised the report source to force all text to black and remove link color styling. Removed the standalone housing monthly figure and standalone tornado-frequency figure, retaining the shared-axis three-panel chart and the two no-basement comparison figures.
+
+**What I accepted:**
+
+____________________________________________________________
+
+**What I modified:**
+
+____________________________________________________________
+
+**What I rejected:**
+
+____________________________________________________________
+
+**Brief rationale:**
+
+____________________________________________________________
+## Entry 40
+
+**Date:** 2026-10-20  
+**Time:** 9:59 PM America/New_York
+
+**Prompt:**
+
+> Great that all looks good to me. The text is still off-colored, although it could be the font. I'm unsure but we can leave it for now. I think the last step now is just to get rid of the header that says the file is a draft and name it appropriately. also I think from a file standpoint we don't need the reports folder buried in analysis. it can be its own folder
+
+**AI produced:** Removed the draft label, moved the report folder from `analysis/reports` to the workspace root, renamed the source and PDF to `ames_tornado_home_purchasing_report`, updated figure paths, and rebuilt the five-page PDF.
 
 **What I accepted:**
 
